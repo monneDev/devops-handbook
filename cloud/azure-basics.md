@@ -15,6 +15,18 @@ az group list --output table
 az vm list -d --output table
 ```
 
+
+## Practical Commands
+```bash
+# Authenticate and verify subscription
+az login
+az account show --output table
+
+# Inspect core resources
+az group list --output table
+az vm list -d --output table
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in azure basics create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

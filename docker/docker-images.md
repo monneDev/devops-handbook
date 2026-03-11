@@ -19,6 +19,19 @@ COPY . .
 CMD ["node","server.js"]
 ```
 
+## Practical Commands
+```bash
+# Build an image from Dockerfile in current folder
+docker build -t myapp:1.0.0 .
+
+# List local images
+docker images
+
+# Tag and push to registry
+docker tag myapp:1.0.0 myrepo/myapp:1.0.0
+docker push myrepo/myapp:1.0.0
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in docker images create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

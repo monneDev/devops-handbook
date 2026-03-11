@@ -19,6 +19,18 @@ spec:
   replicas: 3
 ```
 
+
+## Practical Commands
+```bash
+# Deploy and update image
+kubectl apply -f deployment.yaml
+kubectl set image deployment/api api=myorg/api:1.6.0
+
+# Track rollout and rollback if needed
+kubectl rollout status deployment/api
+kubectl rollout undo deployment/api
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in deployments create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

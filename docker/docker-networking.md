@@ -16,6 +16,21 @@ docker run -d --name backend --network app-net myorg/backend:1.0
 docker run -d --name frontend --network app-net -p 8080:80 myorg/frontend:1.0
 ```
 
+## Practical Commands
+```bash
+# Create network and attach containers
+docker network create app-net
+docker run -d --name api --network app-net myorg/api:1.0
+docker run -d --name worker --network app-net myorg/worker:1.0
+
+# Check which containers are connected
+docker network inspect app-net
+
+# Disconnect and remove network
+docker network disconnect app-net worker
+docker network rm app-net
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in docker networking create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

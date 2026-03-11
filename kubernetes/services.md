@@ -21,6 +21,18 @@ spec:
   - port: 80
 ```
 
+
+## Practical Commands
+```bash
+# Create or apply service
+kubectl apply -f service.yaml
+kubectl get svc
+
+# Verify endpoints behind service
+kubectl get endpoints api-svc
+kubectl describe svc api-svc
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in services create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

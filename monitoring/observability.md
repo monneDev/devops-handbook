@@ -14,6 +14,16 @@ Observability is a foundational DevOps concept used in day-to-day platform and d
 Application -> OpenTelemetry SDK -> Collector -> Backend
 ```
 
+
+## Practical Commands
+```bash
+# Query traces by service (example using Jaeger API)
+curl "http://jaeger.example/api/traces?service=payments-api&limit=5"
+
+# Correlate metrics and logs using trace id
+grep "abc123" app.log
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in observability create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

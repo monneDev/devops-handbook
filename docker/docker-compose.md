@@ -20,6 +20,21 @@ services:
     image: postgres:16
 ```
 
+## Practical Commands
+```bash
+# Start all services in background
+docker compose up -d
+
+# Stop services but keep network/volumes
+docker compose stop
+
+# Start previously stopped services
+docker compose start
+
+# Stop and remove services, network, and default resources
+docker compose down
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in docker compose create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

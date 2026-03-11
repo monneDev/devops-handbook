@@ -15,6 +15,20 @@ provider "aws" { region = "us-east-1" }
 resource "aws_s3_bucket" "logs" { bucket = "example-logs" }
 ```
 
+
+## Practical Commands
+```bash
+# Initialize providers and modules
+terraform init
+
+# Check and apply planned changes
+terraform plan
+terraform apply
+
+# Show current managed resources
+terraform state list
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in terraform basics create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

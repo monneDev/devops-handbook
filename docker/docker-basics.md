@@ -16,6 +16,19 @@ docker run -d --name web -p 8080:80 nginx:latest
 docker ps
 ```
 
+## Practical Commands
+```bash
+# Start a new container from an image
+docker run -d --name web -p 8080:80 nginx:latest
+
+# Stop and start an existing container
+docker stop web
+docker start web
+
+# Remove it when you are done
+docker rm -f web
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in docker basics create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

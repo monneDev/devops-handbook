@@ -16,6 +16,20 @@ docker logs -f api
 docker stop api
 ```
 
+## Practical Commands
+```bash
+# Create and start container
+docker run -d --name api -p 5000:5000 myorg/api:1.0.0
+
+# Start and stop later
+docker stop api
+docker start api
+
+# Inspect status and logs
+docker ps -a
+docker logs --tail 50 api
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in docker containers create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

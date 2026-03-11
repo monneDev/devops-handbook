@@ -14,6 +14,18 @@ CI CD Basics is a foundational DevOps concept used in day-to-day platform and de
 build -> unit-tests -> integration-tests -> deploy-staging -> deploy-prod
 ```
 
+
+## Practical Commands
+```bash
+# Typical local pre-push flow
+npm ci
+npm run lint
+npm test
+
+# Build artifact before deploy stage
+npm run build
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in ci cd basics create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

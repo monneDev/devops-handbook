@@ -21,6 +21,18 @@ spec:
     image: busybox
 ```
 
+
+## Practical Commands
+```bash
+# Create a pod from YAML and watch status
+kubectl apply -f pod.yaml
+kubectl get pod demo-pod -w
+
+# Debug pod behavior
+kubectl describe pod demo-pod
+kubectl logs demo-pod
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in pods create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

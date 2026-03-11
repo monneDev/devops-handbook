@@ -15,6 +15,18 @@ aws s3 ls
 aws ec2 describe-instances --max-results 5
 ```
 
+
+## Practical Commands
+```bash
+# Verify identity and region
+aws sts get-caller-identity
+aws configure get region
+
+# Inspect common resources
+aws ec2 describe-instances --max-results 5
+aws s3 ls
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in aws basics create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

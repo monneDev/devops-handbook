@@ -16,6 +16,17 @@ Private subnet: app services
 Data subnet: databases
 ```
 
+
+## Practical Commands
+```bash
+# Example checks in Kubernetes-based cloud workloads
+kubectl get svc
+kubectl get ingress
+
+# Validate service-to-service connectivity
+kubectl exec -it deploy/api -- curl -s http://backend:8080/health
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in cloud networking create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

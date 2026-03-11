@@ -16,6 +16,18 @@ Cloud Basics is a foundational DevOps concept used in day-to-day platform and de
 3) Monitor and scale
 ```
 
+
+## Practical Commands
+```bash
+# Example high-level provisioning workflow
+terraform apply
+kubectl apply -f k8s/
+
+# Verify app health after deployment
+kubectl get pods
+curl -f https://app.example.com/health
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in cloud basics create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

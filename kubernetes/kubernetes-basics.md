@@ -16,6 +16,19 @@ kubectl scale deployment web --replicas=3
 kubectl get pods
 ```
 
+
+## Practical Commands
+```bash
+# Check cluster and namespace context
+kubectl config current-context
+kubectl get nodes
+kubectl get namespaces
+
+# Apply and inspect a manifest
+kubectl apply -f app.yaml
+kubectl get all -n default
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in kubernetes basics create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

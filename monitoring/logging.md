@@ -14,6 +14,16 @@ Logging is a foundational DevOps concept used in day-to-day platform and deliver
 {"level":"ERROR","service":"api","trace_id":"abc123","message":"database timeout"}
 ```
 
+
+## Practical Commands
+```bash
+# Tail application logs
+kubectl logs -f deploy/api
+
+# Search centralized logs (example with jq)
+cat app.log | jq 'select(.level=="ERROR") | {timestamp,service,message,trace_id}'
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in logging create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

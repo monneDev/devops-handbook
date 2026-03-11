@@ -21,6 +21,18 @@ jobs:
       - run: npm test
 ```
 
+
+## Practical Commands
+```bash
+# Validate workflow files in repo
+git add .github/workflows/ci.yml
+git commit -m "ci: add test workflow"
+git push origin feature/ci-workflow
+
+# Optional: inspect runs with GitHub CLI
+gh run list --limit 5
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in github actions create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

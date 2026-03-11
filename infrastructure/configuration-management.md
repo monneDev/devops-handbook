@@ -19,6 +19,17 @@ Configuration Management is a foundational DevOps concept used in day-to-day pla
         state: present
 ```
 
+
+## Practical Commands
+```bash
+# Dry-run then apply Ansible playbook
+ansible-playbook -i inventory.ini site.yml --check
+ansible-playbook -i inventory.ini site.yml
+
+# Confirm host state
+ansible web -i inventory.ini -m ping
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in configuration management create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

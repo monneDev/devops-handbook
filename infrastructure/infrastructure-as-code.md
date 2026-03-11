@@ -17,6 +17,16 @@ terraform plan
 terraform apply
 ```
 
+
+## Practical Commands
+```bash
+# IaC change workflow
+terraform fmt -recursive
+terraform validate
+terraform plan -out=tfplan
+terraform apply tfplan
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in infrastructure as code create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

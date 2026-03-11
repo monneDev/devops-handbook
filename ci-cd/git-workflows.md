@@ -16,6 +16,19 @@ git commit -m "feat: add metrics endpoint"
 git push origin feature/add-metrics
 ```
 
+
+## Practical Commands
+```bash
+# Create feature branch and sync with main
+git checkout main
+git pull origin main
+git checkout -b feature/improve-logging
+
+# Rebase before opening PR
+git fetch origin
+git rebase origin/main
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in git workflows create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

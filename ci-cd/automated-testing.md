@@ -15,6 +15,17 @@ pytest -q
 # plus integration and smoke tests in pipeline
 ```
 
+
+## Practical Commands
+```bash
+# Fast feedback first
+pytest -q tests/unit
+
+# Then broader validation
+pytest -q tests/integration
+pytest -q tests/e2e -k smoke
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in automated testing create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

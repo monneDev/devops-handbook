@@ -20,6 +20,18 @@ spec:
   - host: app.example.com
 ```
 
+
+## Practical Commands
+```bash
+# Apply ingress rule and inspect
+kubectl apply -f ingress.yaml
+kubectl get ingress
+kubectl describe ingress app-ingress
+
+# Validate DNS + host routing locally
+curl -H "Host: app.example.com" http://<ingress-ip>/
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in ingress create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.

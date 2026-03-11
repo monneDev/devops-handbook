@@ -14,6 +14,17 @@ Monitoring Basics is a foundational DevOps concept used in day-to-day platform a
 Alert when 5xx error rate > 2% for 10 minutes
 ```
 
+
+## Practical Commands
+```bash
+# Example Prometheus query patterns (conceptual)
+# rate(http_requests_total[5m])
+# histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))
+
+# Validate alert pipeline by firing a test alert
+curl -XPOST http://alertmanager.example/api/v2/alerts
+```
+
 ## Why It Matters in DevOps
 This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in monitoring basics create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
 - Reduces deployment risk through predictable operational patterns.
