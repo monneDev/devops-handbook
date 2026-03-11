@@ -1,35 +1,27 @@
-# Docker Images
+# Monitoring Basics
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+Monitoring collects and evaluates system health signals such as latency, error rate, throughput, and saturation. Effective monitoring combines dashboards, alerting, and incident response workflows. In DevOps, this feedback loop protects reliability during fast delivery.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- Golden signals reveal user-impacting issues quickly.
+- Actionable alerts should link to runbooks.
+- Dashboards support incident triage and planning.
+- SLOs align reliability targets with business needs.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+Alert when 5xx error rate > 2% for 10 minutes
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Conceptual Prometheus query examples
+# rate(http_requests_total[5m])
+# histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Trigger test alert in Alertmanager
+curl -XPOST http://alertmanager.example/api/v2/alerts
 ```
 
 ## Why It Matters in DevOps

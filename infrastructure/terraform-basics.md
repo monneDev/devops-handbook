@@ -1,35 +1,29 @@
-# Docker Images
+# Terraform Basics
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+Terraform is a declarative IaC tool that provisions cloud and platform resources via providers. It calculates execution plans and applies only required changes to reach desired state. This supports consistent environment creation and predictable infrastructure evolution.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- Providers connect Terraform to target APIs.
+- Resources represent managed infrastructure objects.
+- Variables and outputs enable reusable modules.
+- State is critical and must be protected.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+provider "aws" { region = "us-east-1" }
+resource "aws_s3_bucket" "logs" { bucket = "example-logs" }
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Initialize and plan
+terraform init
+terraform plan
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Apply and inspect managed objects
+terraform apply
+terraform state list
 ```
 
 ## Why It Matters in DevOps

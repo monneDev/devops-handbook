@@ -1,35 +1,29 @@
-# Docker Images
+# AWS Basics
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+AWS offers a broad set of cloud services for compute, storage, networking, identity, and observability. DevOps teams commonly combine IAM, EC2, EKS/ECS, VPC, S3, and CloudWatch. Automation through CLI and IaC keeps AWS environments reproducible and auditable.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- IAM controls access via users, roles, and policies.
+- VPC defines network boundaries and routing.
+- S3 is a core durable storage service.
+- CloudWatch provides metrics and alarms.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+aws s3 ls
+aws ec2 describe-instances --max-results 5
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Confirm account and region
+aws sts get-caller-identity
+aws configure get region
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Inspect core resources
+aws ec2 describe-instances --max-results 5
+aws s3 ls
 ```
 
 ## Why It Matters in DevOps

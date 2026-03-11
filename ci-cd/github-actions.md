@@ -1,35 +1,35 @@
-# Docker Images
+# GitHub Actions
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+GitHub Actions is a workflow automation system integrated directly into GitHub repositories. It runs jobs on events like pushes, pull requests, tags, and schedules. It is commonly used for tests, security scans, image builds, and deployments.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- Workflows are YAML files in .github/workflows.
+- Jobs run on hosted or self-hosted runners.
+- Reusable actions reduce repeated pipeline logic.
+- Secrets and environments protect sensitive data.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm test
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Add workflow and push
+git add .github/workflows/ci.yml
+git commit -m "ci: add test workflow"
+git push origin feature/ci-workflow
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Optional run inspection
+gh run list --limit 5
 ```
 
 ## Why It Matters in DevOps

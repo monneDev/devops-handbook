@@ -1,35 +1,29 @@
-# Docker Images
+# Infrastructure As Code
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+Infrastructure as Code manages infrastructure with versioned configuration files instead of manual console changes. This improves repeatability, reviewability, and change auditing across environments. IaC is a foundational DevOps practice for scalable platform operations.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- Infrastructure changes go through pull request review.
+- State tracking maps config to real resources.
+- Modules reduce repetition and standardize patterns.
+- Policy checks enforce governance automatically.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+terraform fmt
+terraform validate
+terraform plan
+terraform apply
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
-
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Standard change flow
+terraform fmt -recursive
+terraform validate
+terraform plan -out=tfplan
+terraform apply tfplan
 ```
 
 ## Why It Matters in DevOps

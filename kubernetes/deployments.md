@@ -1,35 +1,35 @@
-# Docker Images
+# Deployments
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+Deployments manage stateless Pods through ReplicaSets and rolling updates. They provide version history, rollback support, and declarative scaling. This makes Deployments the default pattern for many web APIs and backend services.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- Replica count defines desired Pod instances.
+- Rolling strategy controls update pace and disruption.
+- Selectors bind Deployment to matching Pods.
+- Revision history enables rollback.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 3
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Apply deployment
+kubectl apply -f deployment.yaml
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
+# Update image and watch rollout
+kubectl set image deployment/api api=myorg/api:1.6.0
+kubectl rollout status deployment/api
 
-# Inspect local images
-docker images
+# Rollback if needed
+kubectl rollout undo deployment/api
 ```
 
 ## Why It Matters in DevOps

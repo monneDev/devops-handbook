@@ -1,35 +1,29 @@
-# Docker Images
+# Cloud Networking
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+Cloud networking includes virtual networks, routing, DNS, firewalls, and load balancing. It is software-defined and API-driven, which enables automated and repeatable topology management. Strong network segmentation reduces blast radius and improves security.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- Subnets separate tiers and trust zones.
+- Security groups/firewalls define allowed flows.
+- Route tables control traffic paths.
+- Load balancers distribute traffic across healthy targets.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+Public subnet: load balancer
+Private subnet: app services
+Data subnet: databases
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Kubernetes-based network checks
+kubectl get svc
+kubectl get ingress
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Verify service connectivity
+kubectl exec -it deploy/api -- curl -s http://backend:8080/health
 ```
 
 ## Why It Matters in DevOps

@@ -1,35 +1,28 @@
-# Docker Images
+# Automated Testing
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+Automated testing verifies application behavior continuously as code evolves. Combining unit, integration, and end-to-end layers gives balanced coverage and execution speed. In DevOps, tests are a core guardrail for safe, frequent releases.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- Unit tests are fast and isolate logic.
+- Integration tests validate component interactions.
+- End-to-end tests protect critical user journeys.
+- Flaky tests should be treated as incidents.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+pytest -q tests/unit
+pytest -q tests/integration
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Fast checks first
+pytest -q tests/unit
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Wider confidence before release
+pytest -q tests/integration
+pytest -q tests/e2e -k smoke
 ```
 
 ## Why It Matters in DevOps

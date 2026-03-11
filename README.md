@@ -1,44 +1,57 @@
 # DevOps Handbook
 
-The **DevOps Handbook** repository is a structured knowledge base for core DevOps concepts and practices. It is designed for quick human learning and for machine consumption in Retrieval Augmented Generation (RAG) systems.
+This repository is a structured DevOps knowledge base designed for humans and AI systems using Retrieval Augmented Generation (RAG).
 
 ## Purpose
 
-This repository provides concise, practical Markdown documents that explain essential DevOps topics with examples and operational context.
+The goal is to provide concise, practical, and consistently formatted documentation for core DevOps topics.
 
-- Keep each topic focused and easy to retrieve.
-- Use consistent headings to improve chunking and embedding quality.
-- Support onboarding, troubleshooting, and implementation decisions.
-- Provide reusable examples for CI/CD pipelines and platform workflows.
+- Small, focused Markdown files for high retrieval precision.
+- Clear headings for predictable chunking and embeddings.
+- Practical examples and command workflows for real operations.
+- Consistent language and structure across all topics.
 
 ## Repository Structure
 
 ```text
 devops-handbook/
-├── docker/
-├── kubernetes/
-├── ci-cd/
-├── infrastructure/
-├── cloud/
-└── monitoring/
+??? docker/
+?   ??? docker-basics.md
+?   ??? docker-images.md
+?   ??? docker-containers.md
+?   ??? docker-compose.md
+?   ??? docker-networking.md
+??? kubernetes/
+?   ??? kubernetes-basics.md
+?   ??? pods.md
+?   ??? deployments.md
+?   ??? services.md
+?   ??? ingress.md
+??? ci-cd/
+?   ??? ci-cd-basics.md
+?   ??? github-actions.md
+?   ??? git-workflows.md
+?   ??? automated-testing.md
+??? infrastructure/
+?   ??? infrastructure-as-code.md
+?   ??? terraform-basics.md
+?   ??? configuration-management.md
+??? cloud/
+?   ??? cloud-basics.md
+?   ??? aws-basics.md
+?   ??? azure-basics.md
+?   ??? cloud-networking.md
+??? monitoring/
+    ??? monitoring-basics.md
+    ??? logging.md
+    ??? observability.md
 ```
 
-Each folder contains small topic files (200-500 words) with the same section format:
+## RAG Usage
 
-- `What It Is`
-- `Key Concepts`
-- `Simple Example`
-- `Why It Matters in DevOps`
-- `Common Pitfalls`
-- `Quick Checklist`
+This repository is ready for RAG indexing.
 
-## RAG Knowledge Base Usage
-
-This structure is optimized for RAG pipelines:
-
-- Smaller files improve semantic retrieval precision.
-- Consistent headings make chunk boundaries predictable.
-- Focused topics reduce irrelevant context in responses.
-- Technical English improves embedding quality and answer generation.
-
-You can index this repository directly into a vector store and use file-level or section-level chunking for chatbot retrieval.
+- Each file is scoped to a single topic.
+- Sections like `Key Concepts` and `Practical Commands` improve retrieval quality.
+- The format supports both file-level and section-level chunking.
+- Content is written in clear technical English for strong embedding quality.

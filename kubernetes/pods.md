@@ -1,35 +1,35 @@
-# Docker Images
+# Pods
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+A Pod is the smallest deployable unit in Kubernetes. Most workloads run one container per Pod, while sidecars add capabilities like proxies or log shipping. Pods are ephemeral and should be managed by higher-level controllers for production reliability.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- All containers in a Pod share one network namespace.
+- Pod IP changes when Pod is recreated.
+- Readiness and liveness probes control traffic and restarts.
+- Standalone Pods are usually for testing only.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-pod
+spec:
+  containers:
+  - name: app
+    image: busybox
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Create pod and watch status
+kubectl apply -f pod.yaml
+kubectl get pod demo-pod -w
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Debug startup issues
+kubectl describe pod demo-pod
+kubectl logs demo-pod
 ```
 
 ## Why It Matters in DevOps

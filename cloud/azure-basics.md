@@ -1,35 +1,29 @@
-# Docker Images
+# Azure Basics
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+Azure provides cloud services for compute, storage, networking, and managed Kubernetes. Typical DevOps workflows combine Azure identity, resource groups, virtual networks, and monitoring tools. Automation with CLI and IaC keeps environment setup repeatable.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- Resource groups organize lifecycle and ownership.
+- Role-based access control enforces least privilege.
+- VNets and subnets segment workloads securely.
+- Azure Monitor collects metrics and logs.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+az group list --output table
+az vm list -d --output table
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Authenticate and select subscription
+az login
+az account show --output table
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Review resources
+az group list --output table
+az vm list -d --output table
 ```
 
 ## Why It Matters in DevOps

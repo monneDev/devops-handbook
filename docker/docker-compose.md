@@ -1,13 +1,13 @@
 # Docker Compose
 
 ## What It Is
-Docker Compose is a foundational DevOps concept used in day-to-day platform and delivery workflows. Docker topics focus on packaging software into portable containers and running services consistently across developer machines, CI runners, and production hosts. For this topic specifically, teams should focus on clear standards, repeatable execution, and practical operational feedback loops. Treat this as a building block that connects code changes, runtime behavior, and production reliability.
+Docker Compose defines multi-container applications in a single YAML file. It is widely used for local development, integration testing, and reproducible demo stacks. Compose centralizes service definitions, dependency order, and environment configuration.
 
 ## Key Concepts
-- Use versioned images for traceable releases.
-- Keep containers ephemeral and externalize state.
-- Use slim base images to reduce attack surface.
-- Automate build and scan steps in CI.
+- Services describe app components and runtime settings.
+- Named volumes keep state between restarts.
+- Networks enable service-to-service communication.
+- Profiles allow optional services by use case.
 
 ## Simple Example
 ```bash
@@ -22,31 +22,31 @@ services:
 
 ## Practical Commands
 ```bash
-# Start all services in background
+# Start all services
 docker compose up -d
 
-# Stop services but keep network/volumes
+# Stop services (keep resources)
 docker compose stop
 
-# Start previously stopped services
+# Restart stopped services
 docker compose start
 
-# Stop and remove services, network, and default resources
+# Remove stack resources
 docker compose down
 ```
 
 ## Why It Matters in DevOps
-This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in docker compose create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
-- Reduces deployment risk through predictable operational patterns.
-- Improves collaboration between development and operations teams.
-- Increases delivery speed while maintaining service reliability.
+This concept matters because it improves delivery reliability, operational speed, and change safety across environments.
+- Reduces deployment and rollback risk through repeatable workflows.
+- Improves collaboration between developers and platform teams.
+- Speeds troubleshooting with clear operational procedures.
 
 ## Common Pitfalls
-- Treating tooling as a one-time setup instead of a maintained capability.
-- Skipping documentation for conventions and operational decisions.
-- Ignoring observability and rollback planning during implementation.
+- Applying commands manually without documenting process and ownership.
+- Skipping pre-deployment validation and post-deployment verification.
+- Ignoring security basics such as least privilege and secret handling.
 
 ## Quick Checklist
-- Define naming standards and ownership for this area.
-- Automate checks in CI where possible.
-- Review outcomes regularly and refine based on incidents.
+- Keep commands version-controlled with the related docs.
+- Validate changes in a safe environment before production.
+- Review and update procedures after incidents or platform changes.

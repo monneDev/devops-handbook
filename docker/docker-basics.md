@@ -1,13 +1,13 @@
 # Docker Basics
 
 ## What It Is
-Docker Basics is a foundational DevOps concept used in day-to-day platform and delivery workflows. Docker topics focus on packaging software into portable containers and running services consistently across developer machines, CI runners, and production hosts. For this topic specifically, teams should focus on clear standards, repeatable execution, and practical operational feedback loops. Treat this as a building block that connects code changes, runtime behavior, and production reliability.
+Docker packages applications and dependencies into containers that run consistently across laptops, CI runners, and servers. Containers share the host kernel but isolate process execution, filesystem view, and network namespace. This makes them lightweight and reproducible for DevOps delivery workflows.
 
 ## Key Concepts
-- Use versioned images for traceable releases.
-- Keep containers ephemeral and externalize state.
-- Use slim base images to reduce attack surface.
-- Automate build and scan steps in CI.
+- Images are immutable templates used to create containers.
+- Containers are runtime instances of images.
+- Dockerfiles define repeatable image build steps.
+- Registries distribute versioned images across environments.
 
 ## Simple Example
 ```bash
@@ -18,29 +18,29 @@ docker ps
 
 ## Practical Commands
 ```bash
-# Start a new container from an image
+# Start a new container
 docker run -d --name web -p 8080:80 nginx:latest
 
-# Stop and start an existing container
+# Stop and start existing container
 docker stop web
 docker start web
 
-# Remove it when you are done
+# Clean up
 docker rm -f web
 ```
 
 ## Why It Matters in DevOps
-This topic matters because DevOps is about reliable software delivery, not just tooling. Strong practices in docker basics create consistent environments, faster troubleshooting, and safer changes across the release lifecycle.
-- Reduces deployment risk through predictable operational patterns.
-- Improves collaboration between development and operations teams.
-- Increases delivery speed while maintaining service reliability.
+This concept matters because it improves delivery reliability, operational speed, and change safety across environments.
+- Reduces deployment and rollback risk through repeatable workflows.
+- Improves collaboration between developers and platform teams.
+- Speeds troubleshooting with clear operational procedures.
 
 ## Common Pitfalls
-- Treating tooling as a one-time setup instead of a maintained capability.
-- Skipping documentation for conventions and operational decisions.
-- Ignoring observability and rollback planning during implementation.
+- Applying commands manually without documenting process and ownership.
+- Skipping pre-deployment validation and post-deployment verification.
+- Ignoring security basics such as least privilege and secret handling.
 
 ## Quick Checklist
-- Define naming standards and ownership for this area.
-- Automate checks in CI where possible.
-- Review outcomes regularly and refine based on incidents.
+- Keep commands version-controlled with the related docs.
+- Validate changes in a safe environment before production.
+- Review and update procedures after incidents or platform changes.

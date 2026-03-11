@@ -1,35 +1,26 @@
-# Docker Images
+# Observability
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+Observability is the capability to understand internal system behavior through metrics, logs, and traces. It extends monitoring by supporting investigation of unknown or emergent failures. In DevOps, observability is key for operating complex microservice systems.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- Metrics show trend and capacity behavior.
+- Logs provide event-level execution context.
+- Traces reveal request paths across services.
+- Correlation IDs connect telemetry signals.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+Application -> OpenTelemetry SDK -> Collector -> Backend
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Query recent traces (example Jaeger API)
+curl "http://jaeger.example/api/traces?service=payments-api&limit=5"
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Correlate trace id in logs
+grep "abc123" app.log
 ```
 
 ## Why It Matters in DevOps

@@ -1,35 +1,32 @@
-# Docker Images
+# Configuration Management
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+Configuration management keeps server and platform settings consistent over time. Tools such as Ansible apply declarative, idempotent changes across many hosts. This reduces drift and supports reliable patching and operational standards.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- Idempotency avoids repeated side effects.
+- Inventories define target hosts and groups.
+- Templating supports environment-specific values.
+- Secrets should be externalized and encrypted.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+- hosts: web
+  tasks:
+    - name: Ensure Nginx is installed
+      apt:
+        name: nginx
+        state: present
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Dry-run changes
+ansible-playbook -i inventory.ini site.yml --check
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Apply and validate
+ansible-playbook -i inventory.ini site.yml
+ansible web -i inventory.ini -m ping
 ```
 
 ## Why It Matters in DevOps

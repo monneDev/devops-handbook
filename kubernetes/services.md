@@ -1,35 +1,35 @@
-# Docker Images
+# Services
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+A Service provides stable networking for a dynamic set of Pods. Because Pod IPs change, Services expose consistent virtual IPs and DNS names. They are foundational for internal discovery and controlled traffic routing.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- ClusterIP is internal-only service access.
+- NodePort opens access through node ports.
+- LoadBalancer integrates cloud-native load balancers.
+- Selectors map traffic to endpoints.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-svc
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Create service
+kubectl apply -f service.yaml
+kubectl get svc
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Verify backend endpoints
+kubectl get endpoints api-svc
+kubectl describe svc api-svc
 ```
 
 ## Why It Matters in DevOps

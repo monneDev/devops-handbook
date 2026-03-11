@@ -1,35 +1,28 @@
-# Docker Images
+# CI CD Basics
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+CI/CD combines automated integration checks with automated delivery workflows. The goal is to move changes from commit to production safely and quickly. Strong pipelines provide fast feedback, consistent quality gates, and auditable deployments.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- CI runs build, lint, and tests on each change.
+- CD promotes immutable artifacts across environments.
+- Pipeline stages should be deterministic and observable.
+- Rollback paths are part of release design.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+build -> unit-tests -> integration-tests -> deploy-staging -> deploy-prod
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Common pre-push checks
+npm ci
+npm run lint
+npm test
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Build deployable artifact
+npm run build
 ```
 
 ## Why It Matters in DevOps

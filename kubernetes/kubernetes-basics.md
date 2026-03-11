@@ -1,35 +1,30 @@
-# Docker Images
+# Kubernetes Basics
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+Kubernetes orchestrates containerized workloads across clusters of machines. It continuously reconciles runtime state with declared desired state using controllers. In DevOps, Kubernetes improves scalability, resilience, and release automation for distributed systems.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- Clusters contain control plane and worker nodes.
+- Manifests define desired runtime state declaratively.
+- Controllers handle reconciliation loops automatically.
+- Namespaces isolate teams and environments.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+kubectl create deployment web --image=nginx
+kubectl scale deployment web --replicas=3
+kubectl get pods
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Check cluster context
+kubectl config current-context
+kubectl get nodes
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Apply resources and inspect
+kubectl apply -f app.yaml
+kubectl get all -n default
 ```
 
 ## Why It Matters in DevOps

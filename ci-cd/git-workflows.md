@@ -1,35 +1,31 @@
-# Docker Images
+# Git Workflows
 
 ## What It Is
-Docker images are immutable, layered artifacts containing runtime dependencies and application code. Layering allows cache reuse, which accelerates builds in local development and CI. Good image hygiene directly affects security posture, deployment speed, and rollback reliability.
+Git workflows define branching, review, and merge practices for teams. A good workflow minimizes integration friction and preserves release traceability. Common approaches include trunk-based development and release branch models.
 
 ## Key Concepts
-- Each Dockerfile instruction creates a layer.
-- Smaller base images reduce attack surface.
-- Pinned tags improve build reproducibility.
-- Image scanning identifies known vulnerabilities.
+- Short-lived feature branches reduce merge conflicts.
+- Protected main branch enforces review and checks.
+- Commit message conventions improve history quality.
+- Frequent sync with main lowers integration risk.
 
 ## Simple Example
 ```bash
-FROM node:22-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-CMD ["node","server.js"]
+git checkout -b feature/add-metrics
+git commit -m "feat: add metrics endpoint"
+git push origin feature/add-metrics
 ```
 
 ## Practical Commands
 ```bash
-# Build image locally
-docker build -t myapp:1.0.0 .
+# Create branch from latest main
+git checkout main
+git pull origin main
+git checkout -b feature/improve-logging
 
-# Tag and push to registry
-docker tag myapp:1.0.0 myrepo/myapp:1.0.0
-docker push myrepo/myapp:1.0.0
-
-# Inspect local images
-docker images
+# Rebase before PR
+git fetch origin
+git rebase origin/main
 ```
 
 ## Why It Matters in DevOps
